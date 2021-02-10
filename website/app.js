@@ -1,25 +1,31 @@
 /* Global Variables */
 
 let baseURL = 'https://api.openweathermap.org/data/2.5/weather?zip='
-//Please paste your API key here (after &appid=)
-let apiKey = '&appid=';
+//Please paste your API key here (after &appid= and before &units=imperial, where the ' ' is)
+const apiKey = '&appid= &units=imperial';
 // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+let newDate = (d.getMonth()+1)+'.'+ d.getDate()+'.'+ d.getFullYear();
+const generateButton = document.getElementById('generate');
 
-document.getElementById('generate').addEventListener('click', generateAndPost);
+generateButton.addEventListener('click', generateAndPost);
 
 //Main function that gets data from WeatherMap API as well as user data and dynamically update UI
 function generateAndPost(event) {
-  const zipCode = document.getElementById('zip').value;
+  const zipField = document.getElementById('zip');
+  if (zipField.validity.patternMismatch){
+    console.log('Please enter zip code in XXXXX format');
+    generateButton.disabled = true;
+  }
+  const zipCode = zipField.value;
   const response = document.getElementById('feelings').value;
   getLocation(baseURL, zipCode, apiKey)
   .then(function(weatherData){
     postWeather('/weather', {temp: weatherData.main.temp, date: newDate, response: response});
   })
-  .then(
+  .then(() =>{
     updateUI()
-  )
+  })
 }
 
 //this is GET request using fetch (it takes data from API)

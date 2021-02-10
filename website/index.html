@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Weather Journal</title>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title>Weather Journal</title>
 <link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -13,7 +13,8 @@
   </div>
   <div class ="holder zip">
     <label for="zip">Enter Zipcode here</label>
-    <input type="text" id="zip" placeholder="enter zip code here">
+    <!-- <input type="text" id="zip" placeholder="enter zip code here" pattern = "/^\d{5}$/"> -->
+    <input type="text" id="zip" placeholder="enter zip code here" pattern = "^[0-9]{5}$">
   </div>
   <div class ="holder feel">
     <label for="feelings">How are you feeling today?</label>
